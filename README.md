@@ -1,14 +1,16 @@
-Prerequesties
-    Wordpress
-    K6
+: Prerequesties
+    : Wordpress
+    : K6
 
 
-Woocommerce must have installed with few products.
+: Woocommerce must have installed with few products.
 
 /shop
-    page must have products listed.
+    :page must have products listed.
 
 
 --- RUN ---
 
-k6 run shop.js
+: Add your base URL in index page inside setup method.
+
+: k6 run shop.js
