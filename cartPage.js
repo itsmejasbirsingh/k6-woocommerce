@@ -5,7 +5,11 @@ import { takeRest } from './utils/takeRest.js';
 export function goToCartPage(data) {
     group('Cart Page', function() {
 
-        let res = http.get(`${data.base_url}/cart/`);
+        let res = http.get(`${data.base_url}/cart/`, {
+            tags: {
+                page: 'Cart Page'
+            }
+        });
 
         check(res, {
             'Navigated Successfully': r => r.status === 200

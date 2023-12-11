@@ -59,7 +59,7 @@ export function placeOrder(data) {
                 'Nonce': data.nonce
             },
             tags: {
-                name: 'Post Order'
+                name: 'Place Order'
             }
         });
 

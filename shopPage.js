@@ -10,7 +10,11 @@ export function goToShopPage(data) {
 
         const shop_url = `${data.base_url}/shop/`;
 
-        let res = http.get(shop_url);
+        let res = http.get(shop_url, {
+            tags: {
+                page: 'Shop Page'
+            }
+        });
 
         check(res, {
             'Navigated Successfully': (r) => r.status === 200

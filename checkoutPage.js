@@ -6,11 +6,19 @@ import { group, check } from 'k6';
 
 export function goToCheckoutPage(data) {
     group('Checkout Page', function() {
-        let res = http.get(`${data.base_url}/checkout/`);
+        let res = http.get(`${data.base_url}/checkout/`, {
+            tags: {
+                page: 'Checkout Page'
+            }
+        });
 
         group('Assets', function() {
 
-            let orderNote = http.get(`${data.base_url}/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/checkout-blocks/order-note-frontend.js?ver=6c0413e57ff40b54f7d5/`);
+            let orderNote = http.get(`${data.base_url}/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/checkout-blocks/order-note-frontend.js?ver=6c0413e57ff40b54f7d5/`, {
+                tags: {
+                    name: 'Order Note Checkout Page'
+                }
+            });
 
             check(orderNote, {
                 'Navigated Successfully': r => orderNote.body.includes('Add a note to your order')

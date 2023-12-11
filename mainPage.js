@@ -5,7 +5,11 @@ import { takeRest } from './utils/takeRest.js';
 export function goToHomePage(data) {
     group('Main page', function () {
 
-        let res = http.get(`${data.base_url}/`);
+        let res = http.get(`${data.base_url}/`, {
+            tags: {
+                page: 'Home Page'
+            }
+        });
 
         check(res, {
             'Navigated Successfully': (r) => r.status === 200
