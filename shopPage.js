@@ -4,7 +4,7 @@ import { parseHTML } from 'k6/html';
 import { takeRest } from './utils/takeRest.js';
 import { addItemsInCart } from './addItemsInCart.js';
 
-export function goToShopPage(data) {
+export function goToShopPage(data, productCountMatrix) {
 
     group('Shop Page', function() {
 
@@ -36,6 +36,8 @@ export function goToShopPage(data) {
             const productId = product.find('button').attr('data-product_id');
 
             productIds.push(productId);
+
+            productCountMatrix.add(1);
         });
 
         data.product_id =  productIds[Math.floor(Math.random() * productIds.length)];

@@ -10,7 +10,11 @@ export function addItemsInCart(data) {
         const product_id = data.product_id;
         const quantity = randomIntBetween(1, 5);
 
-        let res = http.get(`${data.base_url}/shop/?add-to-cart=${product_id}&quantity=${quantity}`);
+        let res = http.get(`${data.base_url}/shop/?add-to-cart=${product_id}&quantity=${quantity}`, {
+            tags: {
+                name: 'Add to cart'
+            }
+        });
 
         check(res, {
             'Product Added to cart': r => r.body.includes('been added to your cart.')
