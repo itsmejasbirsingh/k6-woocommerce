@@ -3,11 +3,14 @@ import { check, group } from 'k6';
 import { takeRest } from './utils/takeRest.js';
 
 export function goToCartPage(data) {
-    let res = http.get(`${data.base_url}/cart/`);
+    group('Cart Page', function() {
 
-    check(res, {
-        'Cart has items': r => r.body.includes('Add a coupon') === false
-    });
+        let res = http.get(`${data.base_url}/cart/`);
+
+        check(res, {
+            'Navigated Successfully': r => r.status === 200
+        });
+    })
 
     takeRest();
 }

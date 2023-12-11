@@ -7,6 +7,10 @@ export function goToHomePage(data) {
 
         let res = http.get(`${data.base_url}/`);
 
+        check(res, {
+            'Navigated Successfully': (r) => r.status === 200
+        });
+
         group('Assets', function () {
             http.get(`${data.base_url}/wp-includes/blocks/navigation/style.min.css?ver=6.4.1`);
             http.get(`${data.base_url}/wp-includes/blocks/cover/style.min.css?ver=6.4.1`);
@@ -16,11 +20,6 @@ export function goToHomePage(data) {
             http.get(`${data.base_url}/wp-content/plugins/woocommerce/assets/css/woocommerce-blocktheme.css?ver=8.3.1`);
         });
 
-        check(res, {
-            'status is 200': (r) => r.status === 200
-        });
-
+        takeRest();
     });
-
-    takeRest();
 }

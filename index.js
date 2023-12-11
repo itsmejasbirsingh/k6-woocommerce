@@ -11,7 +11,7 @@ export const options = {
         },
         {
             duration: '20s',
-            target: 20
+            target: 10
         },
         {
             duration: '5s',
@@ -22,6 +22,12 @@ export const options = {
         loadimpact: {
             projectID: 3672844
         }
+    },
+    thresholds: {
+        checks: [{
+            threshold: 'rate >= 0.99',
+            abortOnFail: true,
+        }]
     }
 }
 

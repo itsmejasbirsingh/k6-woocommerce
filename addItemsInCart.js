@@ -5,14 +5,17 @@ import { takeRest } from './utils/takeRest.js';
 
 export function addItemsInCart(data) {
 
-    const product_id = data.product_id;
-    const quantity = randomIntBetween(1, 5);
+    group('Add Items In Cart', function() {
 
-    let res = http.get(`${data.base_url}/shop/?add-to-cart=${product_id}&quantity=${quantity}`);
+        const product_id = data.product_id;
+        const quantity = randomIntBetween(1, 5);
 
-    check(res, {
-        'Product Added to cart': r => r.body.includes('been added to your cart.')
+        let res = http.get(`${data.base_url}/shop/?add-to-cart=${product_id}&quantity=${quantity}`);
+
+        check(res, {
+            'Product Added to cart': r => r.body.includes('been added to your cart.')
+        });
+
+        takeRest();
     });
-
-    takeRest();
 }

@@ -1,18 +1,29 @@
 import http from 'k6/http';
-import { orderNow } from './orderNow.js';
+import { placeOrder } from './placeOrder.js';
 import { takeRest } from './utils/takeRest.js';
 import { findBetween } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
-import { fail } from 'k6';
+import { group, check } from 'k6';
 
-export function goToCheckoutPage(data){
-    let res = http.get(`${data.base_url}/checkout/`);
+export function goToCheckoutPage(data) {
+    group('Checkout Page', function() {
+        let res = http.get(`${data.base_url}/checkout/`);
 
-    // Get wp nonce.
-    data.nonce = findBetween(res.body, "storeApiNonce: '", "',");
+        group('Assets', function() {
 
-    if(!data.nonce) fail('Nonce value not found!');
+            let orderNote = http.get(`${data.base_url}/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/checkout-blocks/order-note-frontend.js?ver=6c0413e57ff40b54f7d5/`);
+
+            check(orderNote, {
+                'Navigated Successfully': r => orderNote.body.includes('Add a note to your order')
+            });
+        });
+
+        // Get wp nonce.
+        data.nonce = findBetween(res.body, "storeApiNonce: '", "',");
+
+        if(!data.nonce) fail('Nonce value not found!');
+    });
 
     takeRest();
 
-    orderNow(data);
+    placeOrder(data);
 }
