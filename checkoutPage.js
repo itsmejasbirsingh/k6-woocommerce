@@ -33,5 +33,5 @@ export function goToCheckoutPage(data) {
 
     takeRest();
 
-    // placeOrder(data);
+    placeOrder(data);
 }
