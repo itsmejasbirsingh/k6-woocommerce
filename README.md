@@ -1,16 +1,28 @@
-: Prerequesties
-    : Wordpress
-    : K6
+
+# K6 Woocommerce
+
+Place woocommerce orders using k6 script.
 
 
-: Woocommerce must have installed with few products.
+## Requirements
 
-/shop
-    :page must have products listed.
+- K6
+- Wordpress
+- Woocommrce
 
 
---- RUN ---
+## Installation
 
-: Add your base URL in index page inside setup method.
+- Add a few products in woocommerce.
+- Add your project's base URL inside setup method of index.js
 
-: k6 run shop.js
+```bash
+  k6 run index.js
+```
+    
+## Versions used
+
+**K6:** v0.47.0 (go1.21.2, darwin/arm64)
+
+**Wordpress:** Version 6.4.1
+
