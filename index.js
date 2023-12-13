@@ -24,7 +24,7 @@ export const options = {
     ],
     ext: { // Grafana project id extension block.
         loadimpact: {
-            projectID: 3672844
+            projectID: 3673516
         }
     },
     thresholds: {
